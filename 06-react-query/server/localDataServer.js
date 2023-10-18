@@ -4,16 +4,22 @@ import { nanoid } from 'nanoid';
 import fs from 'fs/promises';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 import morgan from 'morgan';
 
+// create path to the json file 
 const dataFilePath = path.join(__dirname, 'tasks.json');
 
+// access the file, and read the data 
 const readTasksFromFile = async () => {
   try {
+    // read up the data 
     const data = await fs.readFile(dataFilePath, 'utf8');
+    // and return 
     return JSON.parse(data);
   } catch (error) {
     console.error(error);
@@ -21,6 +27,7 @@ const readTasksFromFile = async () => {
   }
 };
 
+// write data 
 const writeTasksToFile = async (tasks) => {
   try {
     await fs.writeFile(dataFilePath, JSON.stringify(tasks));
@@ -29,6 +36,7 @@ const writeTasksToFile = async (tasks) => {
   }
 };
 
+// get task list 
 let taskList = await readTasksFromFile();
 
 if (process.env.NODE_ENV !== 'production') {
