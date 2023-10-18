@@ -17,6 +17,8 @@ export const useCreateTask = () => {
   const { mutate: createTask, isLoading } = useMutation({
     mutationFn: (taskTitle) => customFetch.post('/', { title: taskTitle }),
     onSuccess: () => {
+                      
+      // invalidate method will Refetch the query, which is tasks here 
       queryClient.invalidateQueries({ queryKey: ['tasks'] });
       toast.success('task added');
     },
