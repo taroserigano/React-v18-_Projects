@@ -8,6 +8,7 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // 1. add task and 2. clean up 
     createTask(newItemName, {
       onSuccess: () => {
         setNewItemName('');
