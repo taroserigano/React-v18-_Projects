@@ -3,9 +3,11 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const AppContext = createContext();
 
 const getInitialDarkMode = () => {
+  // this func will check if user has selected to "prefer" dark mode or not boolean 
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme:dark)'
   ).matches;
+  
   const storedDarkMode = localStorage.getItem('darkTheme') === 'true';
 
   return storedDarkMode || prefersDarkMode;
