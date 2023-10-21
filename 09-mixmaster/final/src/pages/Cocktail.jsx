@@ -15,10 +15,12 @@ const singleCocktailQuery = (id) => {
   };
 };
 
+// this is initial Loading 
 export const loader =
   (queryClient) =>
   async ({ params }) => {
     const { id } = params;
+    // loads the cache data, which will be used to display the cocktail ID pag 
     await queryClient.ensureQueryData(singleCocktailQuery(id));
     return { id };
   };
