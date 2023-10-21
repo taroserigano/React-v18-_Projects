@@ -25,9 +25,11 @@ export const loader =
     return { id };
   };
 
+// From Loader,  
 const Cocktail = () => {
   const { id } = useLoaderData();
 
+  // get the cocktail data 
   const { data } = useQuery(singleCocktailQuery(id));
   if (!data) return <Navigate to='/' />;
 
