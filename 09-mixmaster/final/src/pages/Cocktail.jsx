@@ -44,10 +44,16 @@ const Cocktail = () => {
     strInstructions: instructions,
   } = singleDrink;
 
+  // getting ingredients 
   const validIngredients = Object.keys(singleDrink)
     .filter(
-      (key) => key.startsWith('strIngredient') && singleDrink[key] !== null
+      // get ONLY the ingredient key 
+      // ONLY the starts with key 
+      (key) => key.startsWith('strIngredient') && 
+        // only the NON null key 
+        singleDrink[key] !== null
     )
+    // collect all of them 
     .map((key) => singleDrink[key]);
 
   return (
