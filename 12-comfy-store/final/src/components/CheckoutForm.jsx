@@ -5,15 +5,21 @@ import { customFetch, formatPrice } from '../utils';
 import { toast } from 'react-toastify';
 import { clearCart } from '../features/cart/cartSlice';
 
+
+// action gets fired when submitting the form 
 export const action =
+  // passing all the values in "store" | passing the queryClient 
   (store, queryClient) =>
+    // request from the form 
   async ({ request }) => {
     const formData = await request.formData();
+    // extracting the form data 
     const { name, address } = Object.fromEntries(formData);
     const user = store.getState().userState.user;
     const { cartItems, orderTotal, numItemsInCart } =
       store.getState().cartState;
 
+    // gather the info in order to post 
     const info = {
       name,
       address,
@@ -33,7 +39,9 @@ export const action =
           },
         }
       );
+      // order is complete, so clean up 
       queryClient.removeQueries(['orders']);
+      // clean up 
       store.dispatch(clearCart());
       toast.success('order placed successfully');
       return redirect('/orders');
